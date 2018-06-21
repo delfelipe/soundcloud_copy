@@ -4,9 +4,18 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  Image,
+  Animated,
+  PanResponder,
+  Dimensions,
+  Easing,
+  TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LoginScreen } from './screens/Login';
@@ -15,6 +24,9 @@ import { ProfileScreen } from './screens/Profile';
 import { SearchScreen } from './screens/Search';
 import { StreamScreen } from './screens/Stream';
 import { SongScreen } from './screens/Song';
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -35,6 +47,46 @@ const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
   Song: SongScreen
 });
+
+HomeStack.navigationOptions = ({navigation}) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === 'Song') {
+    navigationOptions.tabBarVisible = false;
+  }
+  return navigationOptions;
+};
+
+StreamStack.navigationOptions = ({navigation}) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === 'Song') {
+    navigationOptions.tabBarVisible = false;
+  }
+  return navigationOptions;
+};
+
+SearchStack.navigationOptions = ({navigation}) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === 'Song') {
+    navigationOptions.tabBarVisible = false;
+  }
+  return navigationOptions;
+};
+
+ProfileStack.navigationOptions = ({navigation}) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === 'Song') {
+    navigationOptions.tabBarVisible = false;
+  }
+  return navigationOptions;
+};
 
 const Tabs = createBottomTabNavigator({
   Home: HomeStack,
