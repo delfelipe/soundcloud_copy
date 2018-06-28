@@ -16,7 +16,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-//import { height } from 'window-size';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import images from './../images/Images';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -52,6 +52,9 @@ export class SongScreen extends Component {
                         tension: 1
                     }).start();
                 }
+            },
+            onPanResponderGrant: (evt, gestureState) => {
+                this.animation.extractOffset();
             }
 
         });
@@ -104,8 +107,16 @@ export class SongScreen extends Component {
             <SafeAreaView>
 
                 <View style={styles.container}>
-                    <Button title='Song Screen!' onPress={() => this.props.navigation.navigate('Home')} />
+                    <Ionicons 
+                        style={styles.headerIcon} 
+                        name='ios-arrow-back' 
+                        size={38} 
+                        color={'grey'} 
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    />
+                    <Text style={styles.headerText}>Playlist</Text>
                 </View>
+                <View style={{flex: 1}}></View>
 
                 <Animated.View {...this.PanResponder.panHandlers} style={[ animatedHeight, styles.imageContainer]}>
 
@@ -191,10 +202,19 @@ export class SongScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FFFFFF'
+        flexDirection: 'row',
+        borderBottomWidth: 0.5,
+        borderColor: '#999',
+        marginTop: 50,
+        alignItems: 'center'
+    },
+    headerIcon: {
+        marginLeft: 10,
+        marginRight: 135
+    },
+    headerText: {
+        fontSize: 8,
+        color: '#444'
     },
     imageContainer: {
         position: 'absolute',
